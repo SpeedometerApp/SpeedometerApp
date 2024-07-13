@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background_light"> <!-- Use background_light for light mode -->
+
+    <!-- X, Y, Z TextViews -->
+    <TextView
+        android:id="@+id/xTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/x"
+        android:textSize="24sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/yTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/y"
+        android:textSize="24sp"
+        android:layout_below="@id/xTextView"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/zTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/z"
+        android:textSize="24sp"
+        android:layout_below="@id/yTextView"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Speed TextView (centered horizontally and moved down) -->
+    <TextView
+        android:id="@+id/speedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/speed"
+        android:textSize="32sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/zTextView"
+        android:layout_marginTop="64dp"
+    android:textStyle="bold"/>
+
+    <!-- Unit Buttons (centered horizontally and moved down) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/speedTextView"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="32dp"> <!-- Adjust margin to move further down -->
+
+        <Button
+            android:id="@+id/kmhButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/km_h"
+            android:onClick="onUnitButtonClick"/>
+
+        <Button
+            android:id="@+id/knotsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/knots"
+            android:onClick="onUnitButtonClick" />
+
+        <Button
+            android:id="@+id/msButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/m_s"
+            android:onClick="onUnitButtonClick"/>
+
+    </LinearLayout>
+
+    <!-- Toggle Button (top right corner) -->
+    <ToggleButton
+        android:id="@+id/toggleThemeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:checked="false"
+        android:onClick="onToggleThemeClick"
+        android:text="@string/dark_mode" />
+
+</RelativeLayout>

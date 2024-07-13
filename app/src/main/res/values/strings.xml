@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SpeedDetectorSensorApp</string>
+    <string name="x">X:</string>
+    <string name="y">Y:</string>
+    <string name="z">Z:</string>
+    <string name="km_h">km/h</string>
+    <string name="speed">Speed:</string>
+    <string name="knots">Knots</string>
+    <string name="m_s">m/s</string>
+    <string name="dark_mode">Dark Mode</string>
+</resources>
