@@ -45,47 +45,48 @@
     android:textStyle="bold"/>
 
     <!-- Unit Buttons (centered horizontally and moved down) -->
+
+    <!-- Toggle Button (top right corner) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/speedTextView"
-        android:orientation="horizontal"
+        android:layout_marginTop="325dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="32dp"> <!-- Adjust margin to move further down -->
+        android:orientation="horizontal"> <!-- Adjust margin to move further down -->
 
         <Button
             android:id="@+id/kmhButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/km_h"
-            android:onClick="onUnitButtonClick"/>
+            android:onClick="onUnitButtonClick"
+            android:text="@string/km_h" />
 
         <Button
             android:id="@+id/knotsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/knots"
-            android:onClick="onUnitButtonClick" />
+            android:onClick="onUnitButtonClick"
+            android:text="@string/knots" />
 
         <Button
             android:id="@+id/msButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/m_s"
-            android:onClick="onUnitButtonClick"/>
+            android:onClick="onUnitButtonClick"
+            android:text="@string/m_s" />
 
     </LinearLayout>
 
-    <!-- Toggle Button (top right corner) -->
     <ToggleButton
         android:id="@+id/toggleThemeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="19dp"
         android:checked="false"
         android:onClick="onToggleThemeClick"
         android:text="@string/dark_mode" />
