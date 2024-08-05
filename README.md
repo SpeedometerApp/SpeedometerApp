@@ -1,0 +1,3 @@
+# **SpeedometerApp**
+
+## Design patters are: 
