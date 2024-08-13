@@ -3,92 +3,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/background_light"> <!-- Use background_light for light mode -->
+    android:background="?android:attr/colorBackground">
 
-    <!-- X, Y, Z TextViews -->
-    <TextView
-        android:id="@+id/xTextView"
+    <Switch
+        android:id="@+id/themeSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/x"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Dark Mode  "
+        android:textOff="Light"
+        android:textOn="Dark" />
+
+    <TextView
+        android:id="@+id/speedLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Speed"
         android:textSize="24sp"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/yTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/y"
-        android:textSize="24sp"
-        android:layout_below="@id/xTextView"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/zTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/z"
-        android:textSize="24sp"
-        android:layout_below="@id/yTextView"
-        android:layout_marginBottom="8dp"/>
-
-    <!-- Speed TextView (centered horizontally and moved down) -->
-    <TextView
-        android:id="@+id/speedTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/speed"
-        android:textSize="32sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/zTextView"
-        android:layout_marginTop="64dp"
-    android:textStyle="bold"/>
+        android:layout_above="@id/speedValueTextView"
+        android:layout_marginBottom="16dp" />
 
-    <!-- Unit Buttons (centered horizontally and moved down) -->
+    <TextView
+        android:id="@+id/speedValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7.5"
+        android:textSize="96sp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true" />
 
-    <!-- Toggle Button (top right corner) -->
+    <TextView
+        android:id="@+id/speedUnitTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Knots"
+        android:textSize="32sp"
+        android:layout_below="@id/speedValueTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/speedTextView"
-        android:layout_marginTop="325dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"> <!-- Adjust margin to move further down -->
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/kmhButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onUnitButtonClick"
-            android:text="@string/km_h" />
+            android:text="Km/h" />
 
         <Button
             android:id="@+id/knotsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:onClick="onUnitButtonClick"
-            android:text="@string/knots" />
+            android:layout_marginEnd="16dp"
+            android:text="Knots" />
 
         <Button
             android:id="@+id/msButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:onClick="onUnitButtonClick"
-            android:text="@string/m_s" />
+            android:text="m/s" />
 
     </LinearLayout>
-
-    <ToggleButton
-        android:id="@+id/toggleThemeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="19dp"
-        android:checked="false"
-        android:onClick="onToggleThemeClick"
-        android:text="@string/dark_mode" />
 
 </RelativeLayout>

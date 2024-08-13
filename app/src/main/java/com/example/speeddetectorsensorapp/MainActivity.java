@@ -7,8 +7,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,9 +16,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class MainActivity extends AppCompatActivity {
 
     private SensorManager sensorManager;
-    private TextView speedTextView;
+    private TextView speedValueTextView;
+    private TextView speedUnitTextView;
     private Button kmhButton, knotsButton, msButton;
-    private ToggleButton toggleThemeButton;
+    private Switch themeSwitch;
 
     private String currentUnit = "ms"; // Default unit
     private static final String PREFS_NAME = "SpeedDetectorPrefs";
@@ -49,12 +50,20 @@ public class MainActivity extends AppCompatActivity {
         applyTheme();
         setContentView(R.layout.activity_main);
 
-        speedTextView = findViewById(R.id.speedTextView);
+        speedValueTextView = findViewById(R.id.speedValueTextView);
+        speedUnitTextView = findViewById(R.id.speedUnitTextView);
         kmhButton = findViewById(R.id.kmhButton);
         knotsButton = findViewById(R.id.knotsButton);
         msButton = findViewById(R.id.msButton);
-        toggleThemeButton = findViewById(R.id.toggleThemeButton);
-        toggleThemeButton.setChecked(isDarkMode());
+        themeSwitch = findViewById(R.id.themeSwitch);
+
+        boolean isDarkMode = isDarkMode();
+        updateThemeSwitchText(isDarkMode);
+        themeSwitch.setChecked(isDarkMode);
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setTheme(isChecked);
+            updateThemeSwitchText(isChecked);
+        });
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         kalmanFilter = new KalmanFilter();
@@ -75,11 +84,6 @@ public class MainActivity extends AppCompatActivity {
         msButton.setOnClickListener(view -> {
             currentUnit = "ms";
             updateSpeedDisplay();
-        });
-
-        toggleThemeButton.setOnClickListener(view -> {
-            boolean isChecked = ((ToggleButton) view).isChecked();
-            setTheme(isChecked);
         });
 
         lastUpdateTime = System.nanoTime();
@@ -104,7 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(isDarkMode ?
                 AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        updateThemeSwitchText(isDarkMode);
         recreate();
+    }
+
+    private void updateThemeSwitchText(boolean isDarkMode) {
+        themeSwitch.setText(isDarkMode ? "Light Mode" : "Dark Mode");
     }
 
     private final SensorEventListener sensorEventListener = new SensorEventListener() {
@@ -163,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             // Apply speed change
-            //v=prevSpeed + a*t
             currentSpeed += speedChange;
             lowAccelerationCount = 0;
         }
@@ -195,18 +203,23 @@ public class MainActivity extends AppCompatActivity {
     private String getUnitSuffix(String unit) {
         switch (unit) {
             case "kmh":
-                return " km/h";
+                return "Km/h";
             case "knots":
-                return " knots";
+                return "Knots";
             case "ms":
             default:
-                return " m/s";
+                return "m/s";
         }
     }
 
     private void updateSpeedDisplay() {
         float displaySpeed = convertSpeed(currentSpeed, currentUnit);
-        runOnUiThread(() -> speedTextView.setText(String.format("Speed: %.2f%s", displaySpeed, getUnitSuffix(currentUnit))));
+        String speedValue = String.format("%.1f", displaySpeed);
+        String speedUnit = getUnitSuffix(currentUnit);
+        runOnUiThread(() -> {
+            speedValueTextView.setText(speedValue);
+            speedUnitTextView.setText(speedUnit);
+        });
     }
 
     @Override
